@@ -27,10 +27,9 @@ describe DefinitionContext do
       end
 
       machine = klass.new
-      machine.boot!
-      expect(machine.current_state).to eq(:initial)
-      machine.hop
-      expect(machine.current_state).to eq(:done)
+      expect(machine.state).to eq(:initial)
+      machine.trigger(:hop)
+      expect(machine.state).to eq(:done)
     end
 
     it "honors guard statements" do
@@ -48,9 +47,8 @@ describe DefinitionContext do
       end
 
       machine = klass.new
-      machine.boot!
-      expect(machine.current_state).to eq(:initial)
-      expect { machine.hop }.to raise_error(GuardedTransitionError)
+      expect(machine.state).to eq(:initial)
+      expect { machine.trigger(:hop) }.to raise_error(GuardedTransitionError)
     end
 
     it "bypasses guard statements with a bang" do
@@ -68,9 +66,8 @@ describe DefinitionContext do
       end
 
       machine = klass.new
-      machine.boot!
-      machine.hop!
-      expect(machine.current_state).to eql(:done)
+      machine.trigger(:hop!)
+      expect(machine.state).to eql(:done)
     end
 
     it "raises error on invalid state transitions" do
@@ -83,9 +80,8 @@ describe DefinitionContext do
       end
 
       machine = klass.new
-      machine.boot!
-      expect { machine.hop }.to raise_error(StateNotFoundError)
-      expect { machine.zing }.to raise_error(TransitionNotFoundError)
+      expect { machine.trigger(:hop) }.to raise_error(StateNotFoundError)
+      expect { machine.trigger(:zing) }.to raise_error(TransitionNotFoundError)
     end
   end
 
@@ -115,8 +111,7 @@ describe DefinitionContext do
       expect_any_instance_of(klass).to receive(:log).with(:initial, :hop)
       expect_any_instance_of(klass).to receive(:log2).with(:initial, :hop)
 
-      machine.boot!
-      machine.hop
+      machine.trigger(:hop)
     end
   end
 
@@ -147,9 +142,7 @@ describe DefinitionContext do
         :middle, :final, :hop, any_args
       )
 
-      machine.boot!
-      machine.hop
-      machine.hop
+      machine.trigger(:hop, :hop)
     end
   end
 end

@@ -12,36 +12,33 @@ describe "mounted StrictMachine" do
     end
 
     it "has an initial state" do
-      expect(dummy.current_state).to eq(:new)
+      expect(dummy.state).to eq(:new)
     end
 
     it "shifts state" do
-      dummy.submit
+      dummy.trigger(:submit)
 
-      expect(dummy.current_state).to eq(:awaiting_review)
+      expect(dummy.state).to eq(:awaiting_review)
     end
 
     it "honors guard statements" do
-      dummy.submit
-      dummy.review
+      dummy.trigger(:submit, :review)
 
-      expect { dummy.reject }.to raise_error(GuardedTransitionError)
+      expect { dummy.trigger(:reject) }.to raise_error(GuardedTransitionError)
 
-      expect(dummy.current_state).to eq(:under_review)
+      expect(dummy.state).to eq(:under_review)
     end
 
     it "bypasses guard statements with bangs" do
-      dummy.submit
-      dummy.review
-      dummy.reject!
+      dummy.trigger(:submit, :review, :reject!)
 
-      expect(dummy.current_state).to eq(:rejected)
+      expect(dummy.state).to eq(:rejected)
     end
 
     it "calls on_transition blocks" do
       expect(dummy).to receive(:log)
 
-      dummy.submit
+      dummy.trigger(:submit)
     end
 
     it "sets state to the given status option name" do
