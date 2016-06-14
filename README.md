@@ -1,5 +1,7 @@
 # StrictMachine
 
+[![Code Climate](https://codeclimate.com/github/sardaukar/strict_machine/badges/gpa.svg)](https://codeclimate.com/github/sardaukar/strict_machine)
+
 Easily add state-machine functionality to your Ruby classes.
 
 ## Installation
