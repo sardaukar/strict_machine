@@ -27,7 +27,7 @@ module StrictMachine
     end
 
     def respond_to?(meth, _include_private = false)
-      @state_machine.transition?(meth, current_state)
+      @state_machine && @state_machine.transition?(meth, current_state)
     end
   end
 end
