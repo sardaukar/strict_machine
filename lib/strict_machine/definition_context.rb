@@ -24,13 +24,13 @@ module StrictMachine
     #   false
     # end
 
-    # def get_state_by_name(name)
-    #   @states.each do |this_state|
-    #     return this_state if this_state.name == name
-    #   end
+    def get_state_by_name(name)
+      @states.each do |this_state|
+        return this_state if this_state.name == name
+      end
 
-    #   raise StateNotFoundError, name
-    # end
+      raise StateNotFoundError, name
+    end
 
     def initial_state_name
       @states.first.name

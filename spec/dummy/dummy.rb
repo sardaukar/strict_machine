@@ -1,3 +1,5 @@
+require_relative "dummy_state_machine"
+
 class Dummy
   include StrictMachine::MountStateMachine
 

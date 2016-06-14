@@ -16,11 +16,13 @@ module StrictMachine
       )
     end
 
-    def get_transition(name, is_bang)
-      name = name [0..-2] if is_bang
+    def get_transition(name)
+      name = name.to_s
+      is_bang = name.end_with?("!")
+      name = name[0..-2] if is_bang
 
       @transition_definitions.each do |this_transition|
-        return this_transition if this_transition.name == name.to_sym
+        return is_bang, this_transition if this_transition.name == name.to_sym
       end
 
       raise TransitionNotFoundError, name

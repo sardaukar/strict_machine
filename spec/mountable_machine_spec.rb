@@ -2,7 +2,6 @@ require "spec_helper"
 
 describe "mounted StrictMachine" do
   context "state shifting" do
-    require_relative "dummy/dummy_state_machine"
     require_relative "dummy/dummy"
 
     let!(:dummy) { Dummy.new(2) }
