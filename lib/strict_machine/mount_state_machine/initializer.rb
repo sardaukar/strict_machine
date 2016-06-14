@@ -1,7 +1,7 @@
 module StrictMachine
   module MountStateMachine
     module Initializer
-      def initialize
+      def initialize(*args)
         if self.class.respond_to?(:strict_machine_class)
           @state_machine = self.class.strict_machine_class.new
           @state_machine.mounted_on = self
@@ -11,9 +11,9 @@ module StrictMachine
           @state_machine.state_attr = state_attr
 
           @state_machine.boot!
-
-          super
         end
+
+        super(*args)
       end
     end
   end
