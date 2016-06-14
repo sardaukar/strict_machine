@@ -10,8 +10,9 @@ describe DefinitionContext do
         end
       end
 
-      expect(klass.states.size).to eq(1)
-      expect(klass.states.first.name).to eq(:initial)
+      machine = klass.new
+      expect(machine.states.size).to eq(1)
+      expect(machine.states.first.name).to eq(:initial)
     end
   end
 
@@ -144,5 +145,16 @@ describe DefinitionContext do
 
       machine.trigger(:hop, :hop)
     end
+  end
+
+  it "sets state to the given status option name" do
+    klass = Class.new(StrictMachine::Base) do
+      strict_machine("meh") do
+        state :initial
+      end
+    end
+
+    machine = klass.new
+    expect(machine.state_attr).to eq("meh")
   end
 end

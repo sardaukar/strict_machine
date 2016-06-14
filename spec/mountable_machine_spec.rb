@@ -6,8 +6,9 @@ describe "mounted StrictMachine" do
 
     let!(:dummy) { Dummy.new(2) }
 
-    it "preserves passed arguments to initializer" do
-      expect(dummy.a).to eq(2)
+    it "enumerates states" do
+      expect(dummy.states.size).to eq(5)
+      expect(dummy.states.first.name).to eq(:new)
     end
 
     it "has an initial state" do
