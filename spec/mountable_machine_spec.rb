@@ -5,7 +5,11 @@ describe "mounted StrictMachine" do
     require_relative "dummy/dummy_state_machine"
     require_relative "dummy/dummy"
 
-    let!(:dummy) { Dummy.new }
+    let!(:dummy) { Dummy.new(2) }
+
+    it "preserves passed arguments to initializer" do
+      expect(dummy.a).to eq(2)
+    end
 
     it "has an initial state" do
       expect(dummy.current_state).to eq(:new)

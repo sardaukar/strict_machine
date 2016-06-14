@@ -13,7 +13,7 @@ module StrictMachine
           @state_machine.boot!
         end
 
-        super(*args)
+        super
       end
     end
   end

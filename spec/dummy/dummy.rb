@@ -3,6 +3,12 @@ class Dummy
 
   mount_state_machine DummyStateMachine, state: "meh"
 
+  attr_reader :a
+
+  def initialize(a)
+    @a = a
+  end
+
   def cool_article?
     true
   end
