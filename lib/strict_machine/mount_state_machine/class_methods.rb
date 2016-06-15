@@ -6,10 +6,10 @@ module StrictMachine
 
         metaclass.instance_eval do
           define_method(:strict_machine_class) { klass }
-          define_method(:strict_machine_attr) { "@#{state_attr}".to_sym }
+          define_method(:strict_machine_attr) { state_attr }
         end
 
-        self.include InstanceMethods
+        include InstanceMethods
       end
     end
   end

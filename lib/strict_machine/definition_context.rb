@@ -11,7 +11,7 @@ module StrictMachine
 
     def get_state_by_name(name)
       @states.each do |this_state|
-        return this_state if this_state.name == name
+        return this_state if this_state.name == name.to_sym
       end
 
       raise StateNotFoundError, name

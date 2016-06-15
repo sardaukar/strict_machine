@@ -13,7 +13,7 @@ module StrictMachine
       metaclass.instance_eval do
         define_method(:definition) { dc }
         define_method(:strict_machine_class) { stored }
-        define_method(:strict_machine_attr) { "@#{state_attr}".to_sym }
+        define_method(:strict_machine_attr) { state_attr }
       end
     end
   end

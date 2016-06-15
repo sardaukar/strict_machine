@@ -1,8 +1,12 @@
+require_relative "instance_var_persistence"
+
 require "benchmark"
 
 module StrictMachine
   module MountStateMachine
     module InstanceMethods
+      include InstanceVarPersistence
+
       def trigger(*transitions)
         transitions.map { |t| change_state(t, state) }
 
@@ -16,7 +20,7 @@ module StrictMachine
       end
 
       def state_attr
-        self.class.strict_machine_attr.to_s.delete("@")
+        self.class.strict_machine_attr.to_s
       end
 
       def states
@@ -24,22 +28,6 @@ module StrictMachine
       end
 
       private
-
-      def current_state_attr_value
-        instance_variable_get state_machine_attr_name
-      end
-
-      def write_initial_state
-        write_state(definition.initial_state_name)
-      end
-
-      def write_state(value)
-        instance_variable_set state_machine_attr_name, value
-      end
-
-      def state_machine_attr_name
-        self.class.strict_machine_attr
-      end
 
       def definition
         self.class.strict_machine_class.definition
