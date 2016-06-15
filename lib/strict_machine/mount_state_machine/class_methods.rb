@@ -8,6 +8,8 @@ module StrictMachine
           define_method(:strict_machine_class) { klass }
           define_method(:strict_machine_attr) { "@#{state_attr}".to_sym }
         end
+
+        self.include InstanceMethods
       end
     end
   end

@@ -5,7 +5,6 @@ module StrictMachine
   module MountStateMachine
     def self.included(base)
       base.extend ClassMethods
-      base.include InstanceMethods
     end
   end
 end
