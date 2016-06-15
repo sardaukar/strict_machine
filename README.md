@@ -78,11 +78,14 @@ methods added to it:
 
 and an object's class will have:
 
-- `#definition` the DSL evaluation context object
 - `#strict_machine_attr` the name of the attribute to store state in
 - `#strict_machine_class` either the class containing the state machine, when
 mounting, or `self` when embedding
+
+Also, the target class (`self` when embedding, or the state machine class when mounting) will have:
+
 - `#strict_machine` the DSL hook
+- `#definition` the DSL evaluation context object
 
 ### Internals
 
