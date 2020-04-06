@@ -1,7 +1,7 @@
 require_relative "ext/object"
 
 module StrictMachine
-  VERSION = "0.2.3".freeze
+  VERSION = "0.2.3.1".freeze
 
   class << self; attr_accessor :list; end
 end
